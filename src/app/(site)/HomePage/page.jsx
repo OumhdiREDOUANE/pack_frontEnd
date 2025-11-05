@@ -54,7 +54,7 @@ export default function Home({ categories, products }) {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product, index) => (
+            {products?.map((product, index) => (
               <div key={index} className="bg-white p-4 duration-300">
                 <div className="aspect-square overflow-hidden mb-4">
                   <Link href={`/product/${encodeURIComponent(product.title)}`} className="block">
