@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { apiLogin, resendVerificationEmail } from "src/app/lib/api";
 import { useAuth } from "src/app/components/AuthProvider";
 import Cookies from "js-cookie";
@@ -8,6 +8,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
+  );
+}
+
+function LoginContent() {
   const router = useRouter();
   const { login } = useAuth();
   const searchParams = useSearchParams();
@@ -66,7 +74,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-100 p-4 font-sans">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8 sm:p-10">
-        {/* العنوان الرئيسي */}
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center leading-tight">
           Connexion
         </h2>
