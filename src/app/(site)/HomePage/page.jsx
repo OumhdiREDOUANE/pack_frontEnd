@@ -31,7 +31,7 @@ export default function Home({ categories, products }) {
       }
     };
     fetchData();
-  }, [API_BASE_URL])
+  }, [API_BASE_URL]);
 
   return (
     <>
