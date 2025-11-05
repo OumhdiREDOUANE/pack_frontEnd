@@ -7,20 +7,30 @@ import Link from 'next/link'
 export default function Home({ categories, products }) {
     const [url_image_hero, setUrl_image_hero] = useState(null)
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
-    const fetchSettings = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/setting`)
-        if (!res.ok) throw new Error("Erreur lors du chargement des paramètres")
-        const data = await res.json()
-        setUrl_image_hero(data.url_image_hero || null)
+        // Fetch settings
+        const resSettings = await fetch(`${API_BASE_URL}/api/setting`);
+        const dataSettings = await resSettings.json();
+        setUrl_image_hero(dataSettings.url_image_hero || null);
+
+        // Fetch products
+        const resProducts = await fetch(`${API_BASE_URL}/api/products`);
+        const dataProducts = await resProducts.json();
+        setProducts(dataProducts || []);
+
+        // Fetch categories
+        const resCategories = await fetch(`${API_BASE_URL}/api/categories`);
+        const dataCategories = await resCategories.json();
+        setCategories(dataCategories || []);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
-    fetchSettings()
+    };
+    fetchData();
   }, [API_BASE_URL])
 
   return (
