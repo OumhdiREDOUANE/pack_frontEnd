@@ -92,7 +92,7 @@ export default function Home({ categories, products }) {
         </h2>
 
         <div className="flex flex-wrap justify-center gap-6">
-          {categories.map((cat) => (
+          {categories?.map((cat) => (
             <div key={cat.slug} className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col items-center">
               <Link
                 href={`/category/${cat.slug}`}
